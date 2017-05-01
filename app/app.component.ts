@@ -3,6 +3,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {UsersComponent} from './users.component';
 import {PostsComponent} from './posts.component';
+import {NavComponent} from './nav.component';
 
 
 @RouteConfig([
@@ -14,7 +15,7 @@ import {PostsComponent} from './posts.component';
 @Component({
     selector: 'my-app',
     templateUrl: '/app/app.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, NavComponent]
 })
 export class AppComponent {
 }

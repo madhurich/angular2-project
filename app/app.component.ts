@@ -6,6 +6,7 @@ import {PostsComponent} from './posts.component';
 import {NavComponent} from './nav.component';
 import {NewUserComponent} from './newUser.component';
 import {EditUserComponent} from './editUser.component';
+import {NotFoundComponent} from './notFound.component';
 
 
 @RouteConfig([
@@ -14,7 +15,8 @@ import {EditUserComponent} from './editUser.component';
 		{path: '/user/:id', name: 'EditUser', component: EditUserComponent},
 		{path: '/posts', name: 'Posts', component: PostsComponent},
 		{path: '/users/new', name: 'NewUser', component: NewUserComponent},
-		{path: '*other', name: 'Other', redirectTo: ['Users']}
+		{path: '/user/*other', name: 'NotFound', component: NotFoundComponent},
+		{path: '/*other', name: 'Other', redirectTo: ['Users']}
 	])
 @Component({
     selector: 'my-app',

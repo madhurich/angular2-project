@@ -20,4 +20,5 @@ export class GetUsersService{
 		return this._http.post(this.url, JSON.stringify(newUser))
 							.map((res) => res.json())
 	}
+	
 }

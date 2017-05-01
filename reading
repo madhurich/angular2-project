@@ -1,0 +1,7 @@
+************IMPORTANT***************
+you got an error in getUsersService.ts file
+because you put 
+export class getUsersService(){//parenthesses not required while defining the class, 
+								//you removed it and the error is gone
+	
+}

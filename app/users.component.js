@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', './getusersHere.service', 'angular2/http', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,23 +10,43 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, getusersHere_service_1, http_1, router_1;
     var UsersComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (getusersHere_service_1_1) {
+                getusersHere_service_1 = getusersHere_service_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             UsersComponent = (function () {
-                function UsersComponent() {
+                function UsersComponent(_getUsersService) {
+                    this._getUsersService = _getUsersService;
                 }
+                UsersComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this._getUsersService.getUsers()
+                        .subscribe(function (x) {
+                        console.log(x);
+                        _this.users = x;
+                    });
+                };
                 UsersComponent = __decorate([
                     core_1.Component({
                         selector: 'users',
-                        templateUrl: '/app/users.component.html'
+                        templateUrl: '/app/users.component.html',
+                        providers: [getusersHere_service_1.GetUsersService, http_1.HTTP_PROVIDERS],
+                        directives: [router_1.ROUTER_DIRECTIVES]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [getusersHere_service_1.GetUsersService])
                 ], UsersComponent);
                 return UsersComponent;
             }());

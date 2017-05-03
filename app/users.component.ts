@@ -13,18 +13,39 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 export class UsersComponent implements OnInit{
 	users;
+	deleteUser;
+	getAllUsers;
 	constructor(private _getUsersService: GetUsersService){
 		
-
-
-	}
-
-	ngOnInit(){
-		this._getUsersService.getUsers()
+		this.getAllUsers = () => {
+			this._getUsersService.getUsers()
 				.subscribe((x) => {
 					console.log(x);
 					this.users = x;
 				});
+		};
+
+		this.deleteUser = (id) => {
+			alert(id);
+			this._getUsersService.deleteUser(id)
+									.subscribe((x) => {
+										console.log(x);
+										this.getAllUsers();
+									}, (err) => {
+										console.log('error occured', err);
+									});
+		};	
+
+
 	}
+
+	
+	ngOnInit(){
+		
+		this.getAllUsers();
+
+	}
+
+		
 	
 }

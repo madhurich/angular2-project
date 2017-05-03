@@ -65,10 +65,6 @@ System.register(['angular2/core', './getusersHere.service', 'angular2/http', './
                             _this._router.navigate(['NotFound']);
                         }
                     });
-                    // if(!(id.match(/[0-10]/))){
-                    // 	alert('');
-                    // 	this._router.navigate(['NotFoundComponent'])
-                    // }	
                 };
                 EditUserComponent = __decorate([
                     core_1.Component({

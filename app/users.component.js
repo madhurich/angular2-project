@@ -29,15 +29,28 @@ System.register(['angular2/core', './getusersHere.service', 'angular2/http', 'an
         execute: function() {
             UsersComponent = (function () {
                 function UsersComponent(_getUsersService) {
+                    var _this = this;
                     this._getUsersService = _getUsersService;
+                    this.getAllUsers = function () {
+                        _this._getUsersService.getUsers()
+                            .subscribe(function (x) {
+                            console.log(x);
+                            _this.users = x;
+                        });
+                    };
+                    this.deleteUser = function (id) {
+                        alert(id);
+                        _this._getUsersService.deleteUser(id)
+                            .subscribe(function (x) {
+                            console.log(x);
+                            _this.getAllUsers();
+                        }, function (err) {
+                            console.log('error occured', err);
+                        });
+                    };
                 }
                 UsersComponent.prototype.ngOnInit = function () {
-                    var _this = this;
-                    this._getUsersService.getUsers()
-                        .subscribe(function (x) {
-                        console.log(x);
-                        _this.users = x;
-                    });
+                    this.getAllUsers();
                 };
                 UsersComponent = __decorate([
                     core_1.Component({

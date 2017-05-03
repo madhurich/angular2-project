@@ -9,6 +9,7 @@ import {EditUserComponent} from './editUser.component';
 import {NotFoundComponent} from './notFound.component';
 
 
+
 @RouteConfig([
 		
 		{path: '/users', name: 'Users', component: UsersComponent, useAsDefault: true},

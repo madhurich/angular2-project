@@ -45,13 +45,6 @@ export class EditUserComponent{
 								this._router.navigate(['NotFound']);
 							}
 						});
-		
-		
-							
-							// if(!(id.match(/[0-10]/))){
-							// 	alert('');
-							// 	this._router.navigate(['NotFoundComponent'])
-							// }	
 						
 
 	}

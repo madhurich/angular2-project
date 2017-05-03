@@ -37,7 +37,7 @@ System.register(['angular2/core', './getusersHere.service', 'angular2/http', './
             }],
         execute: function() {
             EditUserComponent = (function () {
-                function EditUserComponent(_getUsers, _routeParams, fb, _router) {
+                function EditUserComponent(_getUsers, _routeParams, _router, fb) {
                     this._getUsers = _getUsers;
                     this._routeParams = _routeParams;
                     this._router = _router;
@@ -56,17 +56,19 @@ System.register(['angular2/core', './getusersHere.service', 'angular2/http', './
                 }
                 EditUserComponent.prototype.ngOnInit = function () {
                     var _this = this;
-                    this._getUsers.getUsers()
+                    var id = this._routeParams.get('id');
+                    this._getUsers.getUserById(id)
                         .subscribe(function (x) {
-                        var id = _this._routeParams.get('id');
-                        console.log(x);
-                        _this.user = x[id];
-                        console.log(typeof id);
-                        // if(!(id.match(/[0-10]/))){
-                        // 	alert('');
-                        // 	this._router.navigate(['NotFoundComponent'])
-                        // }	
+                        _this.user = x;
+                    }, function (res) {
+                        if (res.status == 404) {
+                            _this._router.navigate(['NotFound']);
+                        }
                     });
+                    // if(!(id.match(/[0-10]/))){
+                    // 	alert('');
+                    // 	this._router.navigate(['NotFoundComponent'])
+                    // }	
                 };
                 EditUserComponent = __decorate([
                     core_1.Component({
@@ -74,7 +76,7 @@ System.register(['angular2/core', './getusersHere.service', 'angular2/http', './
                         providers: [http_1.HTTP_PROVIDERS, getusersHere_service_1.GetUsersService],
                         directives: [router_1.ROUTER_DIRECTIVES]
                     }), 
-                    __metadata('design:paramtypes', [getusersHere_service_1.GetUsersService, router_1.RouteParams, common_1.FormBuilder, router_1.Router])
+                    __metadata('design:paramtypes', [getusersHere_service_1.GetUsersService, router_1.RouteParams, router_1.Router, common_1.FormBuilder])
                 ], EditUserComponent);
                 return EditUserComponent;
             }());

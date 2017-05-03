@@ -18,8 +18,8 @@ export class EditUserComponent{
 	constructor(
 		private _getUsers: GetUsersService, 
 		private _routeParams: RouteParams,
-		fb: FormBuilder,
-		private _router: Router){
+		private _router: Router,
+		fb: FormBuilder){
 			this.editUser = fb.group({
 			name: ['', Validators.required],
 			email: ['', Validators.compose([Validators.required, EmailValidator.checkEmail])],
@@ -35,19 +35,24 @@ export class EditUserComponent{
 	}
 
 	ngOnInit(){
-		this._getUsers.getUsers()
-						.subscribe((x) => {
-							var id = this._routeParams.get('id');
-							console.log(x);
-							this.user = x[id];
-							console.log(typeof id);
+		var id = this._routeParams.get('id');
 
+			this._getUsers.getUserById(id)
+						.subscribe((x) => {
+							this.user = x;
+						}, (res) => {
+							if(res.status == 404){
+								this._router.navigate(['NotFound']);
+							}
+						});
+		
+		
+							
 							// if(!(id.match(/[0-10]/))){
 							// 	alert('');
 							// 	this._router.navigate(['NotFoundComponent'])
 							// }	
-						}
-						);
+						
 
 	}
 	/*onSubmit(){

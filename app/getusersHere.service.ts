@@ -16,6 +16,11 @@ export class GetUsersService{
 							.map((res) => res.json());
 	}
 
+	getUserById(id){
+		return this._http.get(this.url + '/' + id)
+							.map((res) => res.json());
+	}
+
 	postUser(newUser){
 		return this._http.post(this.url, JSON.stringify(newUser))
 							.map((res) => res.json())
